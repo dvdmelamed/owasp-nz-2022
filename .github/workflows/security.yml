@@ -23,9 +23,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Secret-Scanner
     steps:
-      - uses: actions/checkout@v2
-      - name: Secret Detection
-        uses: zricethezav/gitleaks-action@master
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   DAST:
     runs-on: ubuntu-latest
