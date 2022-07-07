@@ -67,14 +67,22 @@ jobs:
     name: Dependency-Checker
     steps:
       - uses: actions/checkout@v1
-      - run: |
-          pip install safety
-          safety check -r requirements.txt --json -o output.json
-      - uses: actions/upload-artifact@v2
+      - name: Depcheck
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'test'
+          path: '.'
+          format: 'HTML'
+          args: >
+            --failOnCVSS 7
+            --enableRetired
+            --enableExperimental
+      - name: Upload Test results
+        uses: actions/upload-artifact@master
         if: always()
         with:
-          name: safety
-          path: output.json
+          name: Depcheck report
+          path: ${{github.workspace}}/reports
 
   CONTAINER:
     runs-on: ubuntu-18.04
