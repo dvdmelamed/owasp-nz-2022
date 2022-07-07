@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Static-Vulnerability-Scanner
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: SAST
         uses: jpetrucciani/bandit-check@master
         with:
@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Secret-Scanner
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Secret Detection
         uses: zricethezav/gitleaks-action@master
 
@@ -66,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Dependency-Checker
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Depcheck
         uses: dependency-check/Dependency-Check_Action@main
         with:
